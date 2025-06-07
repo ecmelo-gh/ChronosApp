@@ -1,0 +1,114 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "success": "¡Éxito!",
+    "save": "Guardar",
+    "saving": "Guardando...",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "update": "Actualizar",
+    "add": "Agregar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "actions": "Acciones",
+    "select": "Seleccionar...",
+    "thisWeek": "Esta Semana",
+    "thisMonth": "Este Mes",
+    "thisYear": "Este Año",
+    "export": "Exportar"
+  },
+  "auth": {
+    "signIn": "Iniciar Sesión",
+    "signUp": "Registrarse",
+    "signOut": "Cerrar Sesión",
+    "email": "Correo",
+    "password": "Contraseña",
+    "fullName": "Nombre Completo",
+    "phone": "Teléfono"
+  },
+  "organization": {
+    "setup": "Configura tu organización",
+    "name": "Nombre de la Organización",
+    "type": "Tipo de Negocio",
+    "types": {
+      "barbershop": "Barbería",
+      "beauty_salon": "Salón de Belleza",
+      "nail_salon": "Salón de Uñas",
+      "spa": "Spa"
+    },
+    "settings": {
+      "theme": "Configuración de Tema",
+      "language": "Idioma",
+      "timezone": "Zona Horaria"
+    }
+  },
+  "dashboard": {
+    "welcome": "Bienvenido a {{organizationName}}",
+    "professional": {
+      "title": "Panel del Profesional",
+      "stats": {
+        "appointments": "Total de Citas",
+        "completed": "Servicios Completados",
+        "earnings": "Ganancias Totales",
+        "rating": "Calificación Promedio"
+      },
+      "earnings": "Resumen de Ganancias",
+      "upcomingAppointments": "Próximas Citas"
+    }
+  },
+  "appointments": {
+    "title": "Citas",
+    "new": "Nueva Cita",
+    "upcoming": "Próximas Citas",
+    "completed": "Completadas",
+    "cancelled": "Canceladas",
+    "status": {
+      "upcoming": "Próxima",
+      "completed": "Completada",
+      "cancelled": "Cancelada"
+    }
+  },
+  "earnings": {
+    "title": "Ganancias del Profesional",
+    "total": "Ganancias Totales",
+    "pending": "Ganancias Pendientes",
+    "avgCommission": "Comisión Promedio",
+    "completedServices": "Servicios Completados",
+    "history": "Historial de Ganancias",
+    "recentTransactions": "Transacciones Recientes"
+  },
+  "commissions": {
+    "setup": "Configuración de Comisiones",
+    "professional": "Profesional",
+    "service": "Servicio",
+    "rate": "Tasa de Comisión",
+    "createSuccess": "Tasa de comisión agregada exitosamente",
+    "updateSuccess": "Tasa de comisión actualizada exitosamente",
+    "deleteSuccess": "Tasa de comisión eliminada exitosamente",
+    "confirmDelete": "¿Estás seguro de que deseas eliminar esta tasa de comisión?"
+  },
+  "clients": {
+    "title": "Clientes",
+    "new": "Nuevo Cliente",
+    "import": "Importar Clientes",
+    "export": "Exportar Clientes",
+    "details": "Detalles del Cliente"
+  },
+  "services": {
+    "title": "Servicios",
+    "new": "Nuevo Servicio",
+    "price": "Precio",
+    "duration": "Duración",
+    "description": "Descripción"
+  },
+  "finance": {
+    "title": "Gestión Financiera",
+    "transactions": "Transacciones",
+    "revenue": "Ingresos",
+    "expenses": "Gastos",
+    "reports": "Informes"
+  }
+}

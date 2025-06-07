@@ -1,0 +1,20 @@
+stateDiagram-v2
+    [*] --> scheduled
+    scheduled --> confirmed: Confirmação
+    confirmed --> in_progress: Início
+    in_progress --> completed: Conclusão
+    scheduled --> canceled: Cancelamento
+    confirmed --> canceled: Cancelamento
+    in_progress --> canceled: Cancelamento
+    scheduled --> no_show: Não compareceu
+
+    flowchart TD
+    A[Login Básico] --> B{2FA Ativado?}
+    B -->|Não| C[Permitir Acesso]
+    B -->|Sim| D[Solicitar Código 2FA]
+    D --> E{Validação}
+    E -->|Sucesso| F[Gerar Sessão Criptografada]
+    E -->|Falha| G[Registrar Tentativa]
+    G --> H{Excedeu Limite?}
+    H -->|Sim| I[Bloquear Temporariamente]
+    H -->|Não| D

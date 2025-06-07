@@ -1,0 +1,114 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success!",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "update": "Update",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "actions": "Actions",
+    "select": "Select...",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "thisYear": "This Year",
+    "export": "Export"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full Name",
+    "phone": "Phone Number"
+  },
+  "organization": {
+    "setup": "Set up your organization",
+    "name": "Organization Name",
+    "type": "Business Type",
+    "types": {
+      "barbershop": "Barbershop",
+      "beauty_salon": "Beauty Salon",
+      "nail_salon": "Nail Salon",
+      "spa": "Spa"
+    },
+    "settings": {
+      "theme": "Theme Settings",
+      "language": "Language",
+      "timezone": "Timezone"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome to {{organizationName}}",
+    "professional": {
+      "title": "Professional Dashboard",
+      "stats": {
+        "appointments": "Total Appointments",
+        "completed": "Completed Services",
+        "earnings": "Total Earnings",
+        "rating": "Average Rating"
+      },
+      "earnings": "Earnings Overview",
+      "upcomingAppointments": "Upcoming Appointments"
+    }
+  },
+  "appointments": {
+    "title": "Appointments",
+    "new": "New Appointment",
+    "upcoming": "Upcoming Appointments",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "status": {
+      "upcoming": "Upcoming",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    }
+  },
+  "earnings": {
+    "title": "Professional Earnings",
+    "total": "Total Earnings",
+    "pending": "Pending Earnings",
+    "avgCommission": "Avg Commission",
+    "completedServices": "Completed Services",
+    "history": "Earnings History",
+    "recentTransactions": "Recent Transactions"
+  },
+  "commissions": {
+    "setup": "Commission Setup",
+    "professional": "Professional",
+    "service": "Service",
+    "rate": "Commission Rate",
+    "createSuccess": "Commission rate added successfully",
+    "updateSuccess": "Commission rate updated successfully",
+    "deleteSuccess": "Commission rate deleted successfully",
+    "confirmDelete": "Are you sure you want to delete this commission rate?"
+  },
+  "clients": {
+    "title": "Clients",
+    "new": "New Client",
+    "import": "Import Clients",
+    "export": "Export Clients",
+    "details": "Client Details"
+  },
+  "services": {
+    "title": "Services",
+    "new": "New Service",
+    "price": "Price",
+    "duration": "Duration",
+    "description": "Description"
+  },
+  "finance": {
+    "title": "Financial Management",
+    "transactions": "Transactions",
+    "revenue": "Revenue",
+    "expenses": "Expenses",
+    "reports": "Reports"
+  }
+}

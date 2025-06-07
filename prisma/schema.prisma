@@ -1,0 +1,352 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model appointments {
+  id              String         @id
+  userId          String
+  customerId      String
+  serviceId       String
+  date            DateTime
+  status          String         @default("scheduled")
+  notes           String?
+  created_at      DateTime       @default(now())
+  updated_at      DateTime
+  establishmentId String
+  professionalId  String
+  customers       customers      @relation(fields: [customerId], references: [id])
+  establishments  establishments @relation(fields: [establishmentId], references: [id])
+  services        services       @relation(fields: [serviceId], references: [id])
+  users           users          @relation(fields: [userId], references: [id])
+  professionals   professionals  @relation(fields: [professionalId], references: [id])
+}
+
+model customer_feedback {
+  id         String    @id
+  customerId String
+  userId     String
+  message    String
+  rating     Int
+  source     String
+  visitId    String?
+  tags       String[]
+  status     String    @default("active")
+  created_at DateTime  @default(now())
+  updated_at DateTime
+  customers  customers @relation(fields: [customerId], references: [id])
+  users      users     @relation(fields: [userId], references: [id])
+}
+
+model customer_loyalty {
+  id                       String                     @id
+  customerId               String
+  userId                   String
+  points                   Int                        @default(0)
+  level                    String                     @default("BRONZE")
+  status                   String                     @default("ACTIVE")
+  targetValue              Int
+  currentValue             Int                        @default(0)
+  startDate                DateTime                   @default(now())
+  endDate                  DateTime?
+  description              String?
+  rules                    String[]
+  metadata                 Json?
+  created_at               DateTime                   @default(now())
+  updated_at               DateTime
+  customers                customers                  @relation(fields: [customerId], references: [id])
+  users                    users                      @relation(fields: [userId], references: [id])
+  customer_loyalty_rewards customer_loyalty_rewards[]
+}
+
+model customer_loyalty_rewards {
+  id               String           @id
+  loyaltyProgramId String
+  points           Int
+  status           String           @default("PENDING")
+  redeemedAt       DateTime?
+  created_at       DateTime         @default(now())
+  updated_at       DateTime
+  customer_loyalty customer_loyalty @relation(fields: [loyaltyProgramId], references: [id])
+}
+
+model customer_referrals {
+  id            String    @id
+  customerId    String
+  userId        String
+  referredName  String
+  referredPhone String
+  referredEmail String?
+  notes         String?
+  source        String    @default("APP")
+  status        String    @default("PENDING")
+  convertedAt   DateTime?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime
+  customers     customers @relation(fields: [customerId], references: [id])
+  users         users     @relation(fields: [userId], references: [id])
+}
+
+model customer_communications {
+  id         String    @id
+  customerId String
+  userId     String
+  type       String // WhatsApp, Email, SMS
+  template   String
+  status     String    @default("pending")
+  metadata   Json?
+  sent_at    DateTime
+  created_at DateTime  @default(now())
+  updated_at DateTime
+  customers  customers @relation(fields: [customerId], references: [id])
+  users      users     @relation(fields: [userId], references: [id])
+}
+
+model customer_preferences {
+  id              String    @id
+  customerId      String    @unique
+  whatsapp_opt_in Boolean   @default(true)
+  email_opt_in    Boolean   @default(true)
+  created_at      DateTime  @default(now())
+  updated_at      DateTime
+  customers       customers @relation(fields: [customerId], references: [id])
+}
+
+model customers {
+  id                      String                    @id
+  full_name               String
+  email                   String?                   @unique
+  phone                   String?
+  cpf                     String?                   @unique
+  birthDate               DateTime?
+  imageUrl                String?
+  photoUrl                String?
+  status                  String                    @default("active")
+  created_at              DateTime                  @default(now())
+  updated_at              DateTime
+  userId                  String
+  appointments            appointments[]
+  customer_feedback       customer_feedback[]
+  customer_loyalty        customer_loyalty[]
+  customer_referrals      customer_referrals[]
+  customer_communications customer_communications[]
+  customer_preferences    customer_preferences?
+  users                   users                     @relation(fields: [userId], references: [id])
+}
+
+model establishments {
+  id            String          @id
+  userId        String
+  name          String
+  description   String?
+  address       String
+  city          String
+  state         String
+  zipCode       String
+  phone         String
+  email         String?
+  website       String?
+  logoUrl       String?
+  coverUrl      String?
+  businessHours Json?
+  features      String[]
+  status        String          @default("active")
+  created_at    DateTime        @default(now())
+  updated_at    DateTime
+  appointments  appointments[]
+  users         users           @relation(fields: [userId], references: [id])
+  services      services[]
+  professionals professionals[]
+}
+
+model services {
+  id              String         @id
+  userId          String
+  name            String
+  description     String?
+  duration        Int
+  price           Float
+  status          String         @default("active")
+  created_at      DateTime       @default(now())
+  updated_at      DateTime
+  establishmentId String
+  appointments    appointments[]
+  establishments  establishments @relation(fields: [establishmentId], references: [id])
+  users           users          @relation(fields: [userId], references: [id])
+}
+
+model users {
+  id                      String                    @id @default(cuid())
+  name                    String?
+  email                   String?                   @unique
+  emailVerified           DateTime?
+  image                   String?
+  password                String
+  encrypted_password      String                    @default("")
+  theme_preference        String                    @default("system")
+  raw_user_meta_data      Json?
+  requiresVerification    Boolean                   @default(false)
+  accounts                accounts[]
+  appointments            appointments[]
+  audit_logs              audit_logs[]
+  customer_feedback       customer_feedback[]
+  customer_loyalty        customer_loyalty[]
+  customer_referrals      customer_referrals[]
+  customers               customers[]
+  establishments          establishments[]
+  services                services[]
+  sessions                sessions[]
+  uploads                 uploads[]
+  user_2fa                user_2fa?
+  jobs                    jobs[]
+  professionals           professionals[]
+  customer_communications customer_communications[]
+
+  @@map("users")
+}
+
+model accounts {
+  id                String  @id
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  users             users   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+enum AuthEventType {
+  AUTH_LOGIN_SUCCESS
+  AUTH_LOGIN_FAILURE
+  AUTH_LOGOUT
+  AUTH_2FA_SUCCESS
+  AUTH_2FA_FAILURE
+  AUTH_SUSPICIOUS_ACTIVITY
+  AUTH_ACCOUNT_LOCKED
+}
+
+model audit_logs {
+  id         String        @id @default(cuid())
+  userId     String
+  eventType  AuthEventType
+  metadata   Json?
+  timestamp  DateTime      @default(now())
+  updated_at DateTime      @updatedAt
+
+  user users @relation(fields: [userId], references: [id])
+
+  @@map("audit_logs")
+}
+
+model user_2fa {
+  id            String    @id @default(cuid())
+  userId        String    @unique
+  secret        String
+  backupCodes   String[]
+  enabled       Boolean   @default(false)
+  verified      Boolean   @default(false)
+  recoveryEmail String?
+  lastUsed      DateTime?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+
+  user users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_2fa")
+}
+
+model encryption_keys {
+  id         String   @id @default(cuid())
+  key        String
+  active     Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("encryption_keys")
+}
+
+model sessions {
+  id           String   @id
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  users        users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model uploads {
+  id         String   @id
+  userId     String
+  fileName   String
+  fileType   String
+  fileSize   Int
+  url        String
+  path       String
+  status     String   @default("active")
+  metadata   Json?
+  created_at DateTime @default(now())
+  updated_at DateTime
+  users      users    @relation(fields: [userId], references: [id])
+}
+
+model verificationtokens {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model password_reset_tokens {
+  id         String   @id @default(cuid())
+  email      String
+  token      String   @unique
+  expires    DateTime
+  used       Boolean  @default(false)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([email])
+  @@index([token])
+}
+
+model jobs {
+  id         String   @id
+  type       String
+  data       Json
+  status     String   @default("pending")
+  runAt      DateTime
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  userId     String
+  user       users    @relation(fields: [userId], references: [id])
+}
+
+model professionals {
+  id              String         @id
+  userId          String
+  name            String
+  email           String?        @unique
+  phone           String?
+  bio             String?
+  imageUrl        String?
+  status          String         @default("active")
+  created_at      DateTime       @default(now())
+  updated_at      DateTime
+  establishmentId String
+  establishments  establishments @relation(fields: [establishmentId], references: [id])
+  users           users          @relation(fields: [userId], references: [id])
+  appointments    appointments[]
+}

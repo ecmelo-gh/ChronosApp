@@ -1,0 +1,136 @@
+erDiagram
+    USER {
+        String id PK
+        String auth_id
+        String email
+        DateTime created_at
+    }
+    
+    CUSTOMER {
+        String id PK
+        String user_id FK
+        String cpf
+        String phone
+        String status
+    }
+    
+    ESTABLISHMENT {
+        String id PK
+        String name
+        String city
+        String state
+        String status
+        String parent_id FK
+    }
+    
+    SERVICE {
+        String id PK
+        String name
+        String status
+        String category_id FK
+        String establishment_id FK
+    }
+    
+    SERVICE_CATEGORY {
+        String id PK
+        String name
+        String establishment_id FK
+    }
+    
+    APPOINTMENT {
+        String id PK
+        String customer_id FK
+        String service_id FK
+        String establishment_id FK
+        String professional_id
+        DateTime start_time
+        DateTime end_time
+        Enum status
+    }
+    
+    CUSTOMER_FEEDBACK {
+        String id PK
+        String appointment_id FK
+        String customer_id FK
+        Enum rating
+        String comment
+        DateTime created_at
+        String status
+    }
+    
+    PAYMENT {
+        String id PK
+        String appointment_id FK
+        Decimal amount
+        Enum status
+        String method
+        DateTime created_at
+    }
+    
+    CUSTOMER_LOYALTY {
+        String id PK
+        String customer_id FK
+        Int points
+        Enum level
+    }
+    
+    CUSTOMER_LOYALTY_REWARD {
+        String id PK
+        String loyalty_id FK
+        String reward_type
+        Decimal value
+        String status
+    }
+    
+    CUSTOMER_REFERRAL {
+        String id PK
+        String referrer_id FK
+        String referred_email
+        String status
+        DateTime created_at
+    }
+    
+    USER_ROLE {
+        String id PK
+        String user_id FK
+        Enum role
+    }
+    
+    USER_ESTABLISHMENT {
+        String user_id PK,FK
+        String establishment_id PK,FK
+        String role
+    }
+    
+    USER ||--o{ CUSTOMER : "possui"
+    USER ||--o{ USER_ROLE : "tem"
+    USER ||--o{ USER_ESTABLISHMENT : "vinculado"
+    
+    CUSTOMER ||--o{ APPOINTMENT : "faz"
+    CUSTOMER ||--o{ CUSTOMER_FEEDBACK : "envia"
+    CUSTOMER ||--o{ CUSTOMER_LOYALTY : "participa"
+    CUSTOMER ||--o{ CUSTOMER_REFERRAL : "indica"
+    
+    ESTABLISHMENT ||--o{ SERVICE : "oferece"
+    ESTABLISHMENT ||--o{ SERVICE_CATEGORY : "categoriza"
+    ESTABLISHMENT ||--o{ APPOINTMENT : "recebe"
+    ESTABLISHMENT ||--o{ USER_ESTABLISHMENT : "tem_acesso"
+    
+    SERVICE ||--o{ APPOINTMENT : "agendado_para"
+    SERVICE_CATEGORY ||--o{ SERVICE : "contém"
+    
+    APPOINTMENT ||--|| PAYMENT : "gera"
+    APPOINTMENT ||--|| CUSTOMER_FEEDBACK : "recebe_avaliação"
+    
+    CUSTOMER_LOYALTY ||--o{ CUSTOMER_LOYALTY_REWARD : "oferece"
+
+    classDiagram
+    class ENUMS {
+        <<enumeration>>
+        APPOINTMENT_STATUS = scheduled,confirmed,in_progress,completed,canceled,no_show
+        PAYMENT_STATUS = pending,paid,failed,refunded,partially_refunded
+        PAYMENT_METHOD = credit_card,debit_card,pix,cash,bank_transfer,voucher
+        FEEDBACK_RATING = 1,2,3,4,5
+        LOYALTY_LEVEL = bronze,silver,gold,platinum,diamond
+        USER_ROLE = system_admin,establishment_admin,manager,professional,receptionist,customer_service,customer,marketing,finance_team
+    }

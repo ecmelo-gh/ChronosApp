@@ -1,0 +1,114 @@
+{
+  "common": {
+    "loading": "Carregando...",
+    "error": "Ocorreu um erro",
+    "success": "Sucesso!",
+    "save": "Salvar",
+    "saving": "Salvando...",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "create": "Criar",
+    "update": "Atualizar",
+    "add": "Adicionar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "actions": "Ações",
+    "select": "Selecione...",
+    "thisWeek": "Esta Semana",
+    "thisMonth": "Este Mês",
+    "thisYear": "Este Ano",
+    "export": "Exportar"
+  },
+  "auth": {
+    "signIn": "Entrar",
+    "signUp": "Cadastrar",
+    "signOut": "Sair",
+    "email": "Email",
+    "password": "Senha",
+    "fullName": "Nome Completo",
+    "phone": "Telefone"
+  },
+  "organization": {
+    "setup": "Configure sua organização",
+    "name": "Nome da Organização",
+    "type": "Tipo de Negócio",
+    "types": {
+      "barbershop": "Barbearia",
+      "beauty_salon": "Salão de Beleza",
+      "nail_salon": "Salão de Unhas",
+      "spa": "Spa"
+    },
+    "settings": {
+      "theme": "Configurações de Tema",
+      "language": "Idioma",
+      "timezone": "Fuso Horário"
+    }
+  },
+  "dashboard": {
+    "welcome": "Bem-vindo ao {{organizationName}}",
+    "professional": {
+      "title": "Painel do Profissional",
+      "stats": {
+        "appointments": "Total de Agendamentos",
+        "completed": "Serviços Concluídos",
+        "earnings": "Ganhos Totais",
+        "rating": "Avaliação Média"
+      },
+      "earnings": "Visão Geral dos Ganhos",
+      "upcomingAppointments": "Próximos Agendamentos"
+    }
+  },
+  "appointments": {
+    "title": "Agendamentos",
+    "new": "Novo Agendamento",
+    "upcoming": "Próximos Agendamentos",
+    "completed": "Concluídos",
+    "cancelled": "Cancelados",
+    "status": {
+      "upcoming": "Agendado",
+      "completed": "Concluído",
+      "cancelled": "Cancelado"
+    }
+  },
+  "earnings": {
+    "title": "Ganhos do Profissional",
+    "total": "Ganhos Totais",
+    "pending": "Ganhos Pendentes",
+    "avgCommission": "Comissão Média",
+    "completedServices": "Serviços Concluídos",
+    "history": "Histórico de Ganhos",
+    "recentTransactions": "Transações Recentes"
+  },
+  "commissions": {
+    "setup": "Configuração de Comissões",
+    "professional": "Profissional",
+    "service": "Serviço",
+    "rate": "Taxa de Comissão",
+    "createSuccess": "Taxa de comissão adicionada com sucesso",
+    "updateSuccess": "Taxa de comissão atualizada com sucesso",
+    "deleteSuccess": "Taxa de comissão excluída com sucesso",
+    "confirmDelete": "Tem certeza que deseja excluir esta taxa de comissão?"
+  },
+  "clients": {
+    "title": "Clientes",
+    "new": "Novo Cliente",
+    "import": "Importar Clientes",
+    "export": "Exportar Clientes",
+    "details": "Detalhes do Cliente"
+  },
+  "services": {
+    "title": "Serviços",
+    "new": "Novo Serviço",
+    "price": "Preço",
+    "duration": "Duração",
+    "description": "Descrição"
+  },
+  "finance": {
+    "title": "Gestão Financeira",
+    "transactions": "Transações",
+    "revenue": "Receita",
+    "expenses": "Despesas",
+    "reports": "Relatórios"
+  }
+}
